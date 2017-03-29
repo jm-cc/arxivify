@@ -42,8 +42,6 @@ def main(master_file):
     if not os.path.exists(dest_directory):
         os.makedirs(dest_directory)
 
-    if master_file.endswith(".tex"):
-        master_file=master_file[:-4]
     tex_to_be_processed.append(master_file)
 
     while True:
@@ -59,9 +57,12 @@ def main(master_file):
         dest=os.path.join(dest_directory,dirname)
         if not os.path.exists(dest):
             os.makedirs(dest)        
-        fp=open(os.path.join(dest,file),'w')
+        target_file=os.path.join(dest,file)
+        if file==master_file:
+            target_file=os.path.join(dest,"ms.tex")
+        fp=open(target_file,'w')
         #Force PDFLatex
-        if file==master_file+".tex":
+        if os.path.basename(target_file)=="ms.tex":
             fp.write("\\pdfoutput=1\n")
         fp.write(new_text)
         fp.close()
@@ -74,8 +75,8 @@ def main(master_file):
         shutil.copy2(g,dest)
 
     #Add "<master_file>.bbl"
-    if os.path.isfile(master_file+".bbl"):
-        shutil.copy2(master_file+".bbl",dest_directory)
+    if os.path.isfile(master_file[:-4]+".bbl"):
+        shutil.copy2(master_file[:-4]+".bbl",os.path.join(dest_directory,"ms.bbl"))
 
 if __name__ == '__main__':
     if (len(sys.argv)!=2):

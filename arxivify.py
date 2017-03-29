@@ -7,7 +7,7 @@ tex_to_be_processed=[]
 tex_already_processed=[]
 graphics_to_be_copied=[]
 #If you have special files to be copied, just uncomment and modify this line 
-graphics_to_be_copied=["ecrc.sty","elsevier-logo-3p.pdf","SDlogo-3p.pdf","elsarticle.cls","elsarticle-num.bst"] 
+#graphics_to_be_copied=["ecrc.sty","elsevier-logo-3p.pdf","SDlogo-3p.pdf","elsarticle.cls","elsarticle-num.bst"] 
 
 def usage():
     print("axivify.py <master_file>")
